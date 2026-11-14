@@ -1,0 +1,45 @@
+# Project Architecture
+
+## Overview
+
+This project uses a Medallion Architecture to process NYC Green Taxi 2023 trip data.
+
+## Bronze Layer
+
+**Platform:** Azure Data Factory and Azure Data Lake Storage Gen2
+
+- Source: NYC Green Taxi monthly Parquet files.
+- ADF pipeline: `NYC_web_to_data_lake`.
+- Uses a ForEach activity to iterate through the months.
+- Uses an If Condition to handle different source URL patterns.
+- Destination: ADLS Gen2 `bronze` filesystem, under the `trips2023` folder.
+- Storage format: Parquet.
+
+## Silver Layer
+
+**Platform:** Azure Databricks  
+**Processing:** PySpark
+
+The Silver notebook reads raw Bronze data and applies data quality and transformation operations.
+
+Document the actual cleaning, validation, deduplication and schema-handling steps implemented in the notebook.
+
+## Gold Layer
+
+**Platform:** Azure Databricks  
+**Processing:** PySpark and Delta Lake
+
+The Gold notebook prepares analytical datasets and aggregations for reporting and analysis.
+
+Document the actual Gold outputs and their storage locations based on the notebook implementation.
+
+## Data Flow
+
+NYC Green Taxi Source → ADF → ADLS Bronze → Databricks Silver → Databricks Gold → Analytics
+
+## Important Implementation Notes
+
+- Bronze is stored in ADLS Gen2, not as a Databricks Bronze notebook.
+- Silver and Gold transformations are implemented in Databricks.
+- Do not assume ADF orchestrates the Silver and Gold notebooks unless that integration has been implemented.
+- Do not describe the monthly ingestion pipeline as CDC or watermark-based incremental loading unless those features have been implemented.

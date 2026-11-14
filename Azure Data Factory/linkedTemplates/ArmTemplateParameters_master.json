@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "value": "adf-nyctaxisid"
+        },
+        "LS_ADLS_GEN2_accountKey": {
+            "value": ""
+        },
+        "NYC_TAXI_WEB_properties_typeProperties_url": {
+            "value": "https://d37ci6vzurychx.cloudfront.net"
+        },
+        "LS_ADLS_GEN2_properties_typeProperties_url": {
+            "value": "https://nyctaxisid.dfs.core.windows.net/"
+        },
+        "containerUri": {
+            "value": ""
+        },
+        "containerSasToken": {
+            "value": ""
+        }
+    }
+}

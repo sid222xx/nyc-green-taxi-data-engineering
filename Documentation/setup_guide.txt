@@ -1,0 +1,48 @@
+# Setup Guide
+
+## Prerequisites
+
+- Azure subscription
+- Azure Data Factory
+- Azure Data Lake Storage Gen2 account
+- Azure Databricks workspace
+- Git and GitHub
+
+## Step 1: Configure Azure Storage
+
+1. Create or configure an ADLS Gen2 storage account.
+2. Create a filesystem named `bronze`.
+3. Create the required folder structure.
+4. Configure secure access for Azure Data Factory and Databricks.
+
+## Step 2: Configure Azure Data Factory
+
+1. Review the ARM templates in `azure-data-factory/arm-template/`.
+2. Configure the required factory and storage parameters.
+3. Configure the storage linked service using secure credentials.
+4. Deploy or recreate the ingestion pipeline.
+5. Validate the pipeline by checking the Bronze data in ADLS Gen2.
+
+## Step 3: Configure Databricks
+
+1. Open an Azure Databricks workspace.
+2. Import the Silver and Gold notebooks.
+3. Configure secure access to ADLS Gen2.
+4. Verify that Databricks can read the Bronze data.
+
+## Step 4: Run the Processing Notebooks
+
+1. Run the Silver notebook.
+2. Verify the cleaned Silver output.
+3. Run the Gold notebook.
+4. Verify the analytical outputs and tables.
+
+## Security
+
+Never hardcode storage account keys, client secrets, SAS tokens or passwords in notebooks or configuration files.
+
+Use secure credential management such as Azure Key Vault or Databricks secret scopes.
+
+## Deployment Note
+
+The ARM templates may require environment-specific parameter values and configuration before deployment. The linked-template deployment files may also require the referenced templates to be hosted in storage with an appropriate SAS token.
